@@ -1,0 +1,39 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+
+public enum MapObjectType {
+
+    TREE_PINE_LARGE,
+
+    TREE_PINE_SMALL,
+
+    TREE_ROUND_LARGE,
+
+    TREE_ROUND_SMALL,
+
+    CACTUS_SMALL,
+
+    CACTUS_MEDIUM,
+
+    CACTUS_LARGE,
+
+    ROCK_BROWN_LARGE,
+
+    ROCK_BROWN_SMALL,
+
+    ROCK_GREY_SMALL2,
+
+    ROCK_GREY_SMALL3,
+
+    ROCK_GREY_MEDIUM2,
+
+    ROCK_GREY_MEDIUM4,
+
+    ROCK_GREY_LARGE,
+
+    ROCK_WHITE_MEDIUM1,
+
+    ROCK_WHITE_SMALL1,
+
+    ROCK_WHITE_SMALL4,
+}
