@@ -7,7 +7,8 @@ using UnityEngine.UI;
 /// <summary>
 /// マップアイコンのジェネレーター
 /// </summary>
-public class MapIconGenerator : MonoBehaviour {
+public class MapIconGenerator : MonoBehaviour
+{
 
     public BattleStageHolder holder;
 
@@ -15,7 +16,8 @@ public class MapIconGenerator : MonoBehaviour {
 
     private Dropdown dropdownIcon;
 
-    void Start () {
+    void Start()
+    {
         dropdownIcon = GameObject.Find("DropdownIcon").GetComponent<Dropdown>();
     }
 
@@ -115,15 +117,24 @@ public class MapIconGenerator : MonoBehaviour {
     }
 
     /// <summary>
-    /// 選択マーカーを除去
+    /// 選択マーカーを設定
+    /// </summary>
+    /// <param name="monster"></param>
+    public void InstallSelectionMarker(BattleMapMonster monster)
+    {
+        InstallSelectionMarker(holder.BattleMap.GetByMonster(monster));
+    }
+
+    /// <summary>
+    /// 選択マーカーをとにかく除去
     /// </summary>
     public void UninstallSelectionMarker()
     {
-        // マーカーを削除
+        // マーカーをとにかく削除
         BattleMapIcons icons = holder.BattleMapIcons;
         List<BattleMapIcon> iconList = icons.GetList(BattleMapIconType.FRAME_ORANGE);
 
-        iconList.ForEach( icon => Destroy(icon.GameObject));
+        iconList.ForEach(icon => Destroy(icon.GameObject));
 
         icons.Remove(BattleMapIconType.FRAME_ORANGE);
     }

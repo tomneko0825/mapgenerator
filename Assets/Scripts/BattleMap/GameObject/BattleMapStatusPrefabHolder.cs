@@ -3,13 +3,12 @@ using System.Collections;
 
 public class BattleMapStatusPrefabHolder : MonoBehaviour
 {
-    private static readonly float PANEL_STATUS_Y = 262.0f;
-
-    private static readonly float PANEL_STATUS_Y_MARGIN = 8.0f;
 
     private Canvas canvasBattleMapUi;
 
     public GameObject panelStatusMiniPrefab;
+
+    public GameObject panelArrowPrefab;
 
     private void Start()
     {
@@ -21,14 +20,18 @@ public class BattleMapStatusPrefabHolder : MonoBehaviour
         GameObject go = Instantiate(panelStatusMiniPrefab) as GameObject;
         go.transform.SetParent(canvasBattleMapUi.transform, false);
 
-        // パネルの位置
-        RectTransform rect = go.GetComponent<RectTransform>();
+        return go;
+    }
 
-        float posX = rect.sizeDelta.x / 2.0f + PANEL_STATUS_Y_MARGIN;
+    public GameObject InstantiateArrow()
+    {
+        GameObject go = Instantiate(panelArrowPrefab) as GameObject;
+        go.transform.SetParent(canvasBattleMapUi.transform, false);
 
-        rect.anchoredPosition = new Vector2(posX, PANEL_STATUS_Y);
+        go.transform.SetAsFirstSibling();
 
         return go;
+
     }
 
 }

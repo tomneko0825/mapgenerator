@@ -175,8 +175,19 @@ public class BattleStageHolder : MonoBehaviour
     /// <returns></returns>
     public BattleMapTeam GetCurrentTeam()
     {
-        // TODO: とりあえず
+        // TODO: とりあえず自チーム
         return battleMapTeams.TeamList[0];
+    }
+
+    /// <summary>
+    /// 現在選択されているコマンドを取得
+    /// </summary>
+    /// <returns></returns>
+    public BattleMapCommand GetCurrentCommand()
+    {
+        string commandId = BattleMapStatus.SelectedCommandId;
+
+        return GetCurrentTeam().CommandBoard.GetCommandById(commandId);
     }
 
 }

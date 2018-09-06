@@ -166,11 +166,8 @@ public class BattleMapMonsterMover
         // ステータスの削除
         holder.BattleMapStatus.BattleMapMoveStatus = null;
 
-        // カウンタを減らす
-        string commandId = holder.BattleMapStatus.SelectedCommandId;
-
-        // TODO: 自チーム
-        BattleMapCommand command = holder.BattleMapTeams.TeamList[0].CommandBoard.GetCommandById(commandId);
+        // 現在のチームの選択されているコマンド
+        BattleMapCommand command = holder.GetCurrentCommand();
         command.Count = command.Count - 1;
     }
 }

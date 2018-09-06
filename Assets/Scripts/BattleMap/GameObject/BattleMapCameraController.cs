@@ -8,7 +8,7 @@ public class BattleMapCameraController : MonoBehaviour
 
     public static readonly float TITL_ANGLE = 10.0f;
 
-    public static readonly int MAX_TITL_COUNT = 8;
+    public static readonly int MAX_TITL_COUNT = 5;
 
     public BattleStageHolder holder;
 
@@ -20,7 +20,6 @@ public class BattleMapCameraController : MonoBehaviour
 
     void Update()
     {
-
         //if (Input.GetMouseButtonDown(0))
         //{
 
@@ -79,11 +78,50 @@ public class BattleMapCameraController : MonoBehaviour
 
         float scroll = Input.GetAxis("Mouse ScrollWheel");
 
-        GameObject came = GameObject.Find("BattleMapCamera");
-        Camera cs = came.GetComponent<Camera>();
+        Camera camera = GetCamera();
 
-        cs.orthographicSize -= scroll;
+        // cs.orthographicSize -= scroll;
+
+        float view = camera.fieldOfView - scroll * 10;
+
+        // cs.fieldOfView = Mathf.Clamp(value: view, min: 0.1f, max: 45f);
+        camera.fieldOfView = view;
+
         return;
+    }
+
+    private Camera camera;
+
+    public Camera GetCamera()
+    {
+        if (camera != null)
+        {
+            return camera;
+        }
+
+        GameObject came = GameObject.Find("BattleMapCamera");
+        camera = came.GetComponent<Camera>();
+
+        return camera;
+    }
+
+    public Transform GetTransform ()
+    {
+        return this.transform;
+    }
+
+    public Vector3 MoveCamera(Vector3 pos)
+    {
+        Vector3 current = transform.position;
+
+        Vector3 trans = pos - current;
+
+        // transform.Translate(trans);
+
+        transform.Translate(new Vector3(trans.x, trans.y));
+        // transform.position = new Vector3(pos.x, pos.y);
+
+        return current;
     }
 
     private void MouseDrag(Vector3 mousePos)
@@ -95,7 +133,6 @@ public class BattleMapCameraController : MonoBehaviour
             transform.Translate(-diff * Time.deltaTime * moveSpeed);
         }
 
-
         preMousePos = mousePos;
     }
 
@@ -104,16 +141,31 @@ public class BattleMapCameraController : MonoBehaviour
     /// </summary>
     public void Tilt()
     {
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            Tilt(true);
+        }
+
+        // 戻す
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            Tilt(false);
+        }
+    }
+
+    /// <summary>
+    /// 傾ける
+    /// </summary>
+    public void Tilt(bool isTilt)
+    {
         Vector3 v31 = new Vector3(0, transform.position.y, 0);
         Vector3 v32 = new Vector3(1, 0, 0);
 
-        float angle = TITL_ANGLE;
-
         // 傾ける
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (isTilt)
         {
             // 最大傾きなら何もしない
-            if (8 <= holder.BattleMapSetting.TiltCount)
+            if (MAX_TITL_COUNT <= holder.BattleMapSetting.TiltCount)
             {
                 return;
             }
@@ -124,7 +176,7 @@ public class BattleMapCameraController : MonoBehaviour
         }
 
         // 戻す
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        else
         {
             // 戻してあったら何もしない
             if (holder.BattleMapSetting.TiltCount <= 0)

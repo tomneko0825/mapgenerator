@@ -17,80 +17,135 @@ public class BattleMapStatusPanelOperator
 
     private static readonly string TEXT_LV = "textStatusMiniLvValue";
 
+    private static readonly string TEXT_CHARGE = "textStatusMiniChValue";
+
     private static readonly string TEXT_MAXHP = "textStatusMiniHp1Value";
+
+    private static readonly string TEXT_MAXHP_SUB = "textStatusMiniSubHp1Value";
 
     private static readonly string TEXT_HP = "textStatusMiniHp2Value";
 
+    private static readonly string TEXT_HP_SUB = "textStatusMiniSubHp2Value";
+
+    private static readonly string TEXT_BUFHP = "textStatusMiniHp3Value";
+
+    private static readonly string TEXT_BUFHP_SUB = "textStatusMiniSubHp3Value";
+
     private static readonly string TEXT_ATK = "textStatusMiniAtkValue";
+
+    private static readonly string TEXT_ATK_SUB = "textStatusMiniSubAtkValue";
 
     private static readonly string TEXT_SPD = "textStatusMiniSpdValue";
 
+    private static readonly string TEXT_SPD_SUB = "textStatusMiniSubSpdValue";
+
     private static readonly string TEXT_MOVE = "textStatusMiniMvValue";
+
+    private static readonly string IMAGE_MOVE = "imageStatusMiniMv";
 
     private static readonly string TEXT_VIEW = "textStatusMiniViValue";
 
+    private static readonly string IMAGE_VIEW = "imageStatusMiniVi";
+
     private static readonly string TEXT_CARRY = "textStatusMiniCrValue";
 
+    private static readonly string IMAGE_CARRY = "imageStatusMiniCr";
+
+    private static readonly string TEXT_OVERVIEW_SUB = "textStatusMiniSubSkillOverview";
 
     private static readonly string IMAGE_FACE = "imageStatusMiniFaceMonster";
 
     private static readonly string IMAGE_FACE_COLOR = "imageStatusMiniFaceColor";
 
 
+    private static readonly string BUTTON_SKILL = "buttonStatusMiniSkill";
+
+    private static readonly string TEXT_SKILL = "textStatusMiniSkill";
+
+
+    private static readonly string IMAGE_PAPER = "imageStatusMiniPaper";
+
+    private static readonly string IMAGE_PAPER_SUB = "imageStatusMiniSubPaper";
+
+
+    private static readonly string BUTTON_CANCEL = "buttonStatusMiniCancel";
+
+
     private static readonly string IMAGE_FACE_RESOURCE_PREFIX = "MonsterFace/battle_status_";
 
     private static readonly string IMAGE_FACE_COLOR_RESOURCE_PREFIX = "UI/status_face_";
 
-    // ステータスパネルのGameObject
-    private GameObject statusGameObject;
+    private static readonly string IMAGE_SKILL_COLOR_RESOURCE_PREFIX = "UI/label_skill_";
+
+
+    private static readonly float PANEL_HEIGHT = 228.0f;
+
+    private static readonly float PANEL_HEIGHT_SKILL = 240.0f;
+
+
+    private static readonly float PAPER_HEIGHT_NORMAL = 156.0f;
+
+    private static readonly float PAPER_HEIGHT_SMALL = 124.0f;
+
+    private static readonly float PAPER_POSY_MARGIN = -64.0f;
+
+    private static readonly float PANEL_POSY_MARGIN = 140.0f;
+
+    private static readonly float PANEL_POSY_RESERVE_MARGIN = 20.0f;
+
+    private static readonly float PANEL_POSX = 170.0f;
+
 
     // ステータスパネルのオブジェクト
-    private StatusPanelObject spObject = new StatusPanelObject();
+    private BattleMapStatusPanelObject spObject = new BattleMapStatusPanelObject();
 
     // モンスターの顔のキャッシュ
-    private Dictionary<BattleMapMonsterType, Texture2D> monsterFaceTextureDic = new Dictionary<BattleMapMonsterType, Texture2D>();
+    private Dictionary<BattleMapMonsterType, Sprite> monsterFaceSpriteDic = new Dictionary<BattleMapMonsterType, Sprite>();
 
     // モンスターの顔の背景色のキャッシュ
-    private Dictionary<BattleMapTeamColorType, Texture2D> faceColorTextureDic = new Dictionary<BattleMapTeamColorType, Texture2D>();
+    private Dictionary<BattleMapTeamColorType, Sprite> faceColorSpriteDic = new Dictionary<BattleMapTeamColorType, Sprite>();
 
-    public BattleMapStatusPanelOperator(GameObject statusGameObject)
+    // スキルのボタンの背景色のキャッシュ
+    private Dictionary<MonsterSkillType, Sprite> skillColorSpriteDic = new Dictionary<MonsterSkillType, Sprite>();
+
+    public BattleMapStatusPanelObject GetStatusPanelObject()
     {
-        this.statusGameObject = statusGameObject;
-
-        CreateStatusPanelObject(statusGameObject);
+        return this.spObject;
     }
 
-    private void CreateStatusPanelObject(GameObject statusGameObjec)
+    public BattleMapStatusPanelOperator(
+        GameObject statusGameObject, Action cancelButtonAction)
     {
+        CreateStatusPanelObject(statusGameObject, cancelButtonAction);
+    }
 
-        // text取得用ディクショナリ
-        //Dictionary<string, Text> textDictonary = new Dictionary<string, Text>();
-        //textDictonary.Add(TEXT_NAME, spObject.NameText);
-        //textDictonary.Add(TEXT_CLASS_NAME, spObject.ClassText);
-        //textDictonary.Add(TEXT_RANK, spObject.RankText);
-        //textDictonary.Add(TEXT_LV, spObject.LevelText);
-        //textDictonary.Add(TEXT_MAXHP, spObject.MaxHpText);
-        //textDictonary.Add(TEXT_HP, spObject.HpText);
-        //textDictonary.Add(TEXT_ATK, spObject.AtkText);
-        //textDictonary.Add(TEXT_SPD, spObject.SpdText);
-        //textDictonary.Add(TEXT_MOVE, spObject.MoveText);
-        //textDictonary.Add(TEXT_VIEW, spObject.ViewText);
-        //textDictonary.Add(TEXT_CARRY, spObject.CarryText);
+    private void CreateStatusPanelObject(GameObject statusGameObject, Action cancelButtonAction)
+    {
+        spObject.GameObject = statusGameObject;
+
 
         Dictionary<string, Action<Text>> textDictonary = new Dictionary<string, Action<Text>>();
         textDictonary.Add(TEXT_NAME, spObject.SetNameText);
         textDictonary.Add(TEXT_CLASS_NAME, spObject.SetClassText);
         textDictonary.Add(TEXT_RANK, spObject.SetRankText);
         textDictonary.Add(TEXT_LV, spObject.SetLevelText);
+        textDictonary.Add(TEXT_CHARGE, spObject.SetChargeText);
         textDictonary.Add(TEXT_MAXHP, spObject.SetMaxHpText);
+        textDictonary.Add(TEXT_MAXHP_SUB, spObject.SetMaxHpSubText);
         textDictonary.Add(TEXT_HP, spObject.SetHpText);
+        textDictonary.Add(TEXT_HP_SUB, spObject.SetHpSubText);
+        textDictonary.Add(TEXT_BUFHP, spObject.SetBufHpText);
+        textDictonary.Add(TEXT_BUFHP_SUB, spObject.SetBufHpSubText);
         textDictonary.Add(TEXT_ATK, spObject.SetAtkText);
+        textDictonary.Add(TEXT_ATK_SUB, spObject.SetAtkSubText);
         textDictonary.Add(TEXT_SPD, spObject.SetSpdText);
+        textDictonary.Add(TEXT_SPD_SUB, spObject.SetSpdSubText);
         textDictonary.Add(TEXT_MOVE, spObject.SetMoveText);
         textDictonary.Add(TEXT_VIEW, spObject.SetViewText);
         textDictonary.Add(TEXT_CARRY, spObject.SetCarryText);
+        textDictonary.Add(TEXT_OVERVIEW_SUB, spObject.SetOverviewText);
 
-        Transform[] childTransformList = statusGameObjec.GetComponentsInChildren<Transform>();
+        Transform[] childTransformList = statusGameObject.GetComponentsInChildren<Transform>();
 
         foreach (Transform ts in childTransformList)
         {
@@ -115,6 +170,55 @@ public class BattleMapStatusPanelOperator
             {
                 spObject.FaceColorImage = go;
             }
+
+            // 背景の紙
+            if (go.name == IMAGE_PAPER)
+            {
+                spObject.PaperGameObject = go;
+            }
+
+            // 背景の紙サブ
+            if (go.name == IMAGE_PAPER_SUB)
+            {
+                spObject.PaperSubGameObject = go;
+            }
+
+            // Move
+            if (go.name == IMAGE_MOVE)
+            {
+                spObject.MoveGameObject = go;
+            }
+
+            // View
+            if (go.name == IMAGE_VIEW)
+            {
+                spObject.ViewGameObject = go;
+            }
+
+            // Carry
+            if (go.name == IMAGE_CARRY)
+            {
+                spObject.CarryGameObject = go;
+            }
+
+            // スキルボタン
+            if (go.name == BUTTON_SKILL)
+            {
+                spObject.SkillButton = go;
+            }
+
+            // スキルテキスト
+            if (go.name == TEXT_SKILL)
+            {
+                spObject.SkillText = go;
+            }
+
+            // キャンセルボタン
+            if (go.name == BUTTON_CANCEL)
+            {
+                spObject.CancelButton = go;
+                spObject.CancelButton.GetComponent<Button>().onClick.AddListener(() => cancelButtonAction());
+            }
         }
     }
 
@@ -122,11 +226,18 @@ public class BattleMapStatusPanelOperator
     /// ステータスを表示
     /// </summary>
     /// <param name="monster"></param>
-    public void ShowStatus(BattleMapMonster monster)
+    /// <param name="panelType"></param>
+    /// <param name="panelPositionType"></param>
+    public void ShowStatus(
+        BattleMapMonster monster,
+        BattleMapStatusPanelType panelType,
+        BattleMapStatusPanelPositionType panelPositionType)
     {
-
         // アクティブにする
         SetActive(true);
+
+        // パネルのモード変更
+        SetPanelMode(monster, panelType, panelPositionType);
 
         // テキストを描画
         SetStatusText(monster);
@@ -139,44 +250,124 @@ public class BattleMapStatusPanelOperator
     }
 
     /// <summary>
+    /// スキルを設定
+    /// </summary>
+    /// <param name="skill"></param>
+    public void SetSkill(MonsterSkill skill)
+    {
+        // 反撃時、スキルがなければ終了
+        if (skill == null)
+        {
+            spObject.SkillButton.SetActive(false);
+            spObject.OverviewText.text = "";
+            return;
+        }
+
+        else
+        {
+            spObject.SkillButton.SetActive(true);
+
+            spObject.SkillText.GetComponent<Text>().text = skill.Name;
+            spObject.OverviewText.text = skill.Overview;
+
+            // 背景色の入れ替え
+            SetSkillColorImage(skill);
+        }
+    }
+
+    /// <summary>
+    /// モードごとに設定
+    /// </summary>
+    /// <param name="panelType"></param>
+    /// <param name="monster"></param>
+    /// <param name="panelPositionType"></param>
+    private void SetPanelMode(
+        BattleMapMonster monster, BattleMapStatusPanelType panelType, BattleMapStatusPanelPositionType panelPositionType)
+    {
+
+        float panelHeight = PANEL_HEIGHT;
+
+        if (panelType == BattleMapStatusPanelType.NORMAL)
+        {
+            spObject.PaperGameObject.SetActive(true);
+            spObject.PaperSubGameObject.SetActive(false);
+            spObject.SkillButton.SetActive(false);
+            spObject.CancelButton.SetActive(false);
+
+            panelHeight = PANEL_HEIGHT;
+        }
+        else if (panelType == BattleMapStatusPanelType.SKILL1)
+        {
+            spObject.PaperGameObject.SetActive(false);
+            spObject.PaperSubGameObject.SetActive(true);
+            spObject.SkillButton.SetActive(true);
+            spObject.CancelButton.SetActive(true);
+
+            panelHeight = PANEL_HEIGHT_SKILL;
+        }
+
+        RectTransform goRect = spObject.GameObject.GetComponent<RectTransform>();
+
+        goRect.anchorMin = new Vector2(0, 0);
+        goRect.anchorMax = new Vector2(0, 0);
+
+        // 本体の高さ
+        goRect.sizeDelta = new Vector2(goRect.sizeDelta.x, panelHeight);
+
+        // 本体の位置
+        float posY = PANEL_POSY_MARGIN + (goRect.sizeDelta.y / 2);
+
+        // スキル表示ありの場合
+        if (panelPositionType == BattleMapStatusPanelPositionType.ON_SKILL_PANEL)
+        {
+            posY += BattleMapSkillSelectOperator.GetPanelHeight(monster.GetAvailableSkillList().Count);
+        }
+
+        // 控えありの場合
+        else if (panelPositionType == BattleMapStatusPanelPositionType.ON_RESERVE)
+        {
+            posY += goRect.sizeDelta.y + PANEL_POSY_RESERVE_MARGIN;
+        }
+
+        goRect.anchoredPosition = new Vector2(PANEL_POSX, posY);
+    }
+
+
+    /// <summary>
     /// 顔を差し替え
     /// </summary>
     /// <param name="monster"></param>
     private void SetFaceImage(BattleMapMonster monster)
     {
-        // テクスチャを取得
-        Texture2D texture = GetFaceImageTexture(monster.BattleStatus.MonsterType);
+        // スプライトを取得
+        Sprite sprite = GetFaceImageSprite(monster.BattleStatus.MonsterType);
 
         // テクスチャを差し替え
         GameObject go = spObject.FaceImage;
         Image img = go.GetComponent<Image>();
-        img.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
+        img.sprite = sprite;
     }
 
     /// <summary>
-    /// 顔のテクスチャを取得
+    /// 顔のスプライトを取得
     /// </summary>
     /// <param name="monsterType"></param>
     /// <returns></returns>
-    private Texture2D GetFaceImageTexture(BattleMapMonsterType monsterType)
+    private Sprite GetFaceImageSprite(BattleMapMonsterType monsterType)
     {
         // キャッシュから取得
-        bool exists = monsterFaceTextureDic.ContainsKey(monsterType);
+        bool exists = monsterFaceSpriteDic.ContainsKey(monsterType);
         if (exists)
         {
-            return monsterFaceTextureDic[monsterType];
+            return monsterFaceSpriteDic[monsterType];
         }
 
         // パスを作成
         string typeStr = monsterType.ToString().ToLower();
         string imagePath = IMAGE_FACE_RESOURCE_PREFIX + typeStr;
 
-
         // スプライトを取得
-        Texture2D texture = Resources.Load(imagePath) as Texture2D;
-        monsterFaceTextureDic.Add(monsterType, texture);
-
-        return texture;
+        return Resources.Load<Sprite>(imagePath);
     }
 
     /// <summary>
@@ -185,27 +376,27 @@ public class BattleMapStatusPanelOperator
     /// <param name="monster"></param>
     private void SetFaceColorImage(BattleMapMonster monster)
     {
-        // テクスチャを取得
-        Texture2D texture = GetFaceColorImageTexture(monster.Team.TeamColor);
+        // スプライトを取得
+        Sprite sprite = GetFaceColorImageSprite(monster.Team.TeamColor);
 
-        // テクスチャを差し替え
+        // スプライトを差し替え
         GameObject go = spObject.FaceColorImage;
         Image img = go.GetComponent<Image>();
-        img.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
+        img.sprite = sprite;
     }
 
     /// <summary>
-    /// 顔の色のテクスチャを取得
+    /// 顔の色のスプライトを取得
     /// </summary>
     /// <param name="colorType"></param>
     /// <returns></returns>
-    private Texture2D GetFaceColorImageTexture(BattleMapTeamColorType colorType)
+    private Sprite GetFaceColorImageSprite(BattleMapTeamColorType colorType)
     {
         // キャッシュから取得
-        bool exists = faceColorTextureDic.ContainsKey(colorType);
+        bool exists = faceColorSpriteDic.ContainsKey(colorType);
         if (exists)
         {
-            return faceColorTextureDic[colorType];
+            return faceColorSpriteDic[colorType];
         }
 
         // パスを作成
@@ -214,10 +405,49 @@ public class BattleMapStatusPanelOperator
 
 
         // スプライトを取得
-        Texture2D texture = Resources.Load(imagePath) as Texture2D;
-        faceColorTextureDic.Add(colorType, texture);
+        return Resources.Load<Sprite>(imagePath);
+    }
 
-        return texture;
+    /// <summary>
+    /// スキルの色を差し替え
+    /// </summary>
+    /// <param name="monster"></param>
+    private void SetSkillColorImage(MonsterSkill skill)
+    {
+        // スプライトを取得
+        Sprite sprite = GetSkillColorImageSprite(skill.MonsterSkillType);
+
+        // スプライトを差し替え
+        GameObject go = spObject.SkillButton;
+        Image img = go.GetComponent<Image>();
+        img.sprite = sprite;
+    }
+
+    /// <summary>
+    /// スキルの色のスプライトを取得
+    /// </summary>
+    /// <param name="skillType"></param>
+    /// <returns></returns>
+    private Sprite GetSkillColorImageSprite(MonsterSkillType skillType)
+    {
+        // キャッシュから取得
+        bool exists = skillColorSpriteDic.ContainsKey(skillType);
+        if (exists)
+        {
+            return skillColorSpriteDic[skillType];
+        }
+
+        // パスを作成
+        string typeStr = "red";
+
+        if (skillType == MonsterSkillType.COUNTER)
+        {
+            typeStr = "blue";
+        }
+        string imagePath = IMAGE_SKILL_COLOR_RESOURCE_PREFIX + typeStr;
+
+        // スプライトを取得
+        return Resources.Load<Sprite>(imagePath);
     }
 
 
@@ -230,11 +460,14 @@ public class BattleMapStatusPanelOperator
         SetActive(false);
     }
 
+    /// <summary>
+    /// 全体のアクティブ状態の切り替え
+    /// </summary>
+    /// <param name="active"></param>
     private void SetActive(bool active)
     {
-        statusGameObject.SetActive(active);
+        spObject.GameObject.SetActive(active);
     }
-
 
     /// <summary>
     /// テキスト部分を描画
@@ -250,13 +483,25 @@ public class BattleMapStatusPanelOperator
 
         spObject.LevelText.text = "" + monster.BattleStatus.Level;
 
-        spObject.MaxHpText.text = "" + monster.BattleStatus.MaxHp;
+        spObject.ChargeText.text = "" + monster.BattleStatus.Charge;
+
+        string maxHp = "" + monster.BattleStatus.MaxHp;
+        maxHp = "/" + maxHp.PadLeft(3, ' ');
+        spObject.MaxHpText.text = maxHp;
+        spObject.MaxHpSubText.text = maxHp;
 
         spObject.HpText.text = "" + monster.BattleStatus.Hp;
+        spObject.HpSubText.text = "" + monster.BattleStatus.Hp;
+
+        // TODO: bufHP
+        spObject.BufHpText.text = "";
+        spObject.BufHpSubText.text = "";
 
         spObject.AtkText.text = "" + monster.BattleStatus.Atk;
+        spObject.AtkSubText.text = "" + monster.BattleStatus.Atk;
 
         spObject.SpdText.text = "" + monster.BattleStatus.Spd;
+        spObject.SpdSubText.text = "" + monster.BattleStatus.Spd;
 
         spObject.MoveText.text = "" + monster.BattleStatus.MoveCount;
 
@@ -264,93 +509,6 @@ public class BattleMapStatusPanelOperator
 
         spObject.CarryText.text = "" + monster.BattleStatus.Carry;
     }
-
-}
-
-class StatusPanelObject
-{
-    // 名前
-    public Text NameText { get; set; }
-    public void SetNameText(Text text)
-    {
-        this.NameText = text;
-    }
-
-    // クラス
-    public Text ClassText { get; set; }
-    public void SetClassText(Text text)
-    {
-        this.ClassText = text;
-    }
-
-    // ランク
-    public Text RankText { get; set; }
-    public void SetRankText(Text text)
-    {
-        this.RankText = text;
-    }
-
-    // レベル
-    public Text LevelText { get; set; }
-    public void SetLevelText(Text text)
-    {
-        this.LevelText = text;
-    }
-
-    // maxHP
-    public Text MaxHpText { get; set; }
-    public void SetMaxHpText(Text text)
-    {
-        this.MaxHpText = text;
-    }
-
-    // HP
-    public Text HpText { get; set; }
-    public void SetHpText(Text text)
-    {
-        this.HpText = text;
-    }
-
-    // ATK
-    public Text AtkText { get; set; }
-    public void SetAtkText(Text text)
-    {
-        this.AtkText = text;
-    }
-
-    // SPD
-    public Text SpdText { get; set; }
-    public void SetSpdText(Text text)
-    {
-        this.SpdText = text;
-    }
-
-    // Move
-    public Text MoveText { get; set; }
-    public void SetMoveText(Text text)
-    {
-        this.MoveText = text;
-    }
-
-    // View
-    public Text ViewText { get; set; }
-    public void SetViewText(Text text)
-    {
-        this.ViewText = text;
-    }
-
-    // Carry
-    public Text CarryText { get; set; }
-    public void SetCarryText(Text text)
-    {
-        this.CarryText = text;
-    }
-
-    // モンスターの顔
-    public GameObject FaceImage { get; set; }
-
-    // モンスターの顔の背景色
-    public GameObject FaceColorImage { get; set; }
 
 }
 

@@ -13,10 +13,13 @@ public class BattleMapMoveProcessor
 
     private MapIconGenerator iconGenerator;
 
-    public BattleMapMoveProcessor(BattleStageHolder holder, MapIconGenerator iconGenerator)
+    private MapIconController iconController;
+
+    public BattleMapMoveProcessor(BattleStageHolder holder, MapIconGenerator iconGenerator, MapIconController iconController)
     {
         this.holder = holder;
         this.iconGenerator = iconGenerator;
+        this.iconController = iconController;
     }
 
 
@@ -32,19 +35,18 @@ public class BattleMapMoveProcessor
         // 移動可能なタイルを取得
         HashSet<BattleMapTile> movableTileSet = GetMovableTileSet(startTile, monster);
 
-        foreach (BattleMapTile bmt in movableTileSet)
-        {
-            // 範囲の描画
-            DrawMovableTile(bmt, movableTileSet);
-        }
+        // 範囲の描画
+        MapUtils.DrawRangeTile(movableTileSet, iconGenerator.InstallFrameAque);
 
         // マーカーを強調表示
-        HighlightMarker(monster);
+        iconController.HighlightMarker(monster);
 
         // 選択ステータスを設定
         SetSelectedStatus(startTile, monster, new List<BattleMapTile>(movableTileSet));
 
     }
+
+
 
     /// <summary>
     /// 選択ステータスを設定
@@ -81,12 +83,9 @@ public class BattleMapMoveProcessor
         {
             tmp += path + "\n";
         }
-        // Debug.Log("path:\n" + tmp);
 
         // 一番早いパスを取得
         MapTilePathInfo fastPath = ChoiceFastPath(pathList);
-
-        // Debug.Log("fastPath:" + fastPath.PathString);
 
         // ステータスを更新
         SetConfirmStatus(fastPath);
@@ -263,62 +262,7 @@ public class BattleMapMoveProcessor
         }
 
     }
-
-
-
-    /// <summary>
-    /// マーカーを強調表示
-    /// </summary>
-    /// <param name="monster"></param>
-    private void HighlightMarker(BattleMapMonster monster)
-    {
-        // マーカーを回転させる
-        BattleMapIcon icon = holder.BattleMapIcons.GetSingle(BattleMapIconType.MONSTER_MAKER, monster.X, monster.Y);
-        icon.BattleMapIconStatusType = BattleMapIconStatusType.HIGHLIGHT;
-    }
-
-
-    /// <summary>
-    /// 移動可能範囲の描画
-    /// </summary>
-    /// <param name="bmt"></param>
-    /// <param name="movableTileSet"></param>
-    private void DrawMovableTile(BattleMapTile bmt, HashSet<BattleMapTile> movableTileSet)
-    {
-        BattleMapTileJointInfo jointInfo = bmt.JointInfo;
-
-        foreach (MapTileJointPositionType jointPositionType in Enum.GetValues(typeof(MapTileJointPositionType)))
-        {
-            BattleMapTile jointTile = jointInfo.GetJointTile(jointPositionType);
-
-            bool isDraw = false;
-
-            // はじっこは描写
-            if (jointTile == null)
-            {
-                isDraw = true;
-            }
-
-            else
-            {
-                // 移動可能タイルに存在しない場合は描写
-                if (movableTileSet.Contains(jointTile) == false)
-                {
-                    isDraw = true;
-                }
-
-            }
-
-            // 描写
-            if (isDraw == true)
-            {
-                iconGenerator.InstallFrameAque(bmt, (int)jointPositionType * 60);
-            }
-
-        }
-
-    }
-
+  
     /// <summary>
     /// 移動のキャンセル
     /// </summary>
@@ -328,8 +272,7 @@ public class BattleMapMoveProcessor
         BattleMapMonster monster = moveStatus.TargetMonster;
 
         // 回転を止める
-        BattleMapIcon icon = holder.BattleMapIcons.GetSingle(BattleMapIconType.MONSTER_MAKER, monster.X, monster.Y);
-        icon.BattleMapIconStatusType = BattleMapIconStatusType.NORMAL;
+        iconController.UnHighlightMarker(monster);
 
         // 枠とパスを削除
         ClearFlameAndPath();

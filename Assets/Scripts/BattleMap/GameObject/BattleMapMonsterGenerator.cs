@@ -77,6 +77,10 @@ public class BattleMapMonsterGenerator : MonoBehaviour
         GameObject go = GetMonsterGameObject(bmt, monsterType);
         monster.GameObject = go;
 
+        // スキル
+        monster.SkillList = CreateMonsterSkillList();
+        monster.CounterSkillList = CreateMonsterCounterSkillList();
+
         // チーム
         BattleMapTeam team = GetTeamByDropdown();
         monster.Team = team;
@@ -100,8 +104,38 @@ public class BattleMapMonsterGenerator : MonoBehaviour
         // 視界の設定
         BattleMapUnmasker unmasker = new BattleMapUnmasker(holder, mapObjectGenerator);
         unmasker.Unmask(monster);
+    }
 
-        Debug.Log("monster:" + dropdownMonster.captionText.text);
+    private List<MonsterSkill> CreateMonsterCounterSkillList()
+    {
+        List<MonsterSkill> list = new List<MonsterSkill>();
+
+        string id = "1";
+        string name = "反撃" + id;
+        string overview = "射程1　威力1\n反撃します。";
+        list.Add(new MonsterSkill(
+            id, name, MonsterSkillType.COUNTER, MonsterSkillTargetType.ONLY_ENEMY, 1, 0, EffectType.BITE122, overview));
+
+        return list;
+    }
+
+
+    private List<MonsterSkill> CreateMonsterSkillList()
+    {
+        List<MonsterSkill> list = new List<MonsterSkill>();
+
+        int monsterCount = holder.BattleMapMonsters.MonsterList.Count + 1;
+
+        for (int i = 0; i < monsterCount; i++)
+        {
+            string id = "" + i + 1;
+            string name = "攻撃" + id;
+            string overview = "射程" + (i + 1) + "威力1\n攻撃します。";
+            list.Add(new MonsterSkill(
+                id, name, MonsterSkillType.ATTACK, MonsterSkillTargetType.ONLY_ENEMY, (i + 1), 0, EffectType.BITE122, overview));
+        }
+
+        return list;
     }
 
     /// <summary>
@@ -241,5 +275,20 @@ public class BattleMapMonsterGenerator : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// モンスターの除去
+    /// </summary>
+    /// <param name="monster"></param>
+    public void DownMonster(BattleMapMonster monster)
+    {
+        // マーカーを除去
+        mapIconGenerator.UninstallMonsterMarker(monster);
+
+        // リストから削除
+        holder.BattleMapMonsters.DownMonster(monster);
+
+        // GameObjectを破棄
+        Destroy(monster.GameObject);
+    }
 
 }

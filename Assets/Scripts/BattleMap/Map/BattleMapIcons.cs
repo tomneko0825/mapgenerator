@@ -76,10 +76,16 @@ public class BattleMapIcons
     /// <param name="x"></param>
     /// <param name="y"></param>
     /// <returns></returns>
-    public List<BattleMapIcon> Get(BattleMapIconType iconType, int x, int y)
+    private List<BattleMapIcon> Get(BattleMapIconType iconType, int x, int y)
     {
         string key = CreateKey(iconType, x, y);
-        return battleMapIcons[key];
+
+        if (battleMapIcons.ContainsKey(key))
+        {
+            return battleMapIcons[key];
+        }
+
+        return new List<BattleMapIcon>();
     }
 
     /// <summary>

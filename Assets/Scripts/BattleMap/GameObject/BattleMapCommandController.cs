@@ -21,6 +21,7 @@ public class BattleMapCommandController : MonoBehaviour
 
     public BattleStageHolder holder;
 
+    public BattleMapDialogGenerator dialogGenerator;
 
     /// <summary>
     /// コマンドボタンが押された時の処理
@@ -28,11 +29,18 @@ public class BattleMapCommandController : MonoBehaviour
     /// <param name="index"></param>
     public void PushCommandButton(string commandId)
     {
+        // モーダルなら終了
+        bool modal = holder.BattleMapStatus.OnModal;
+        if (modal == true)
+        {
+            return;
+        }
+
         // 変更可能じゃないなら終了
         bool enable = holder.BattleMapStatus.EnableCommandChange();
         if (enable == false)
         {
-            return; 
+            return;
         }
 
         // コマンド中かどうか
@@ -42,6 +50,7 @@ public class BattleMapCommandController : MonoBehaviour
         if (onCommand)
         {
             // TODO: 同じIDなら終了確認
+            dialogGenerator.ShowDialog("行動回数が残っています。\n終了してもよろしいですか？", this.ForcedFinish);
             return;
         }
 
@@ -70,6 +79,22 @@ public class BattleMapCommandController : MonoBehaviour
         // ボタンの拡張処理
         ExpandButton(commandId);
     }
+
+    /// <summary>
+    /// 強制終了
+    /// </summary>
+    private void ForcedFinish()
+    {
+        // 回数を０にする
+        BattleMapCommand command = holder.GetCurrentCommand();
+        command.Count = 0;
+
+        // ボードの更新
+        UpdateActionBoard();
+
+        Debug.Log("強制終了！");
+    }
+
 
     /// <summary>
     /// コマンド状態のリセット
@@ -252,12 +277,15 @@ public class BattleMapCommandController : MonoBehaviour
         else
         {
             string commandId = holder.BattleMapStatus.SelectedCommandId;
-            BattleMapCommand bmc = commandBoard.GetCommandById(commandId);
-            GameObject textGo = bmc.TextGameObject;
-            Text text = textGo.GetComponent<Text>();
-            text.text = bmc.Count + "/" + bmc.MaxCount;
-        }
 
+            if (commandId != null)
+            {
+                BattleMapCommand bmc = commandBoard.GetCommandById(commandId);
+                GameObject textGo = bmc.TextGameObject;
+                Text text = textGo.GetComponent<Text>();
+                text.text = bmc.Count + "/" + bmc.MaxCount;
+            }
+        }
     }
 
     /// <summary>

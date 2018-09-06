@@ -23,7 +23,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>Temp\bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_2_2;UNITY_2018_2;UNITY_2018;PLATFORM_ARCH_64;UNITY_64;UNITY_ANALYTICS;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_SPRITES;ENABLE_GRID;ENABLE_TILEMAP;ENABLE_TERRAIN;ENABLE_TEXTURE_STREAMING;ENABLE_DIRECTOR;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_TIMELINE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;INCLUDE_DYNAMIC_GI;INCLUDE_GI;ENABLE_MONO_BDWGC;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_VIDEO;ENABLE_PACKMAN;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_LOCALIZATION;PLATFORM_STANDALONE_WIN;PLATFORM_STANDALONE;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_EVENT_QUEUE;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;ENABLE_VR;ENABLE_AR;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;NET_2_0_SUBSET;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_VSTU</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_2_6;UNITY_2018_2;UNITY_2018;PLATFORM_ARCH_64;UNITY_64;UNITY_ANALYTICS;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_SPRITES;ENABLE_GRID;ENABLE_TILEMAP;ENABLE_TERRAIN;ENABLE_TEXTURE_STREAMING;ENABLE_DIRECTOR;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_TIMELINE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;INCLUDE_DYNAMIC_GI;INCLUDE_GI;ENABLE_MONO_BDWGC;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_VIDEO;ENABLE_PACKMAN;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_LOCALIZATION;PLATFORM_STANDALONE_WIN;PLATFORM_STANDALONE;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_EVENT_QUEUE;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;ENABLE_VR;ENABLE_AR;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;NET_2_0_SUBSET;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_VSTU</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
@@ -50,7 +50,7 @@
     <UnityProjectGenerator>Unity/VSTU</UnityProjectGenerator>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
-    <UnityVersion>2018.2.2f1</UnityVersion>
+    <UnityVersion>2018.2.6f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -61,11 +61,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleAudio.cs" />
+    <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModulePhysics.cs" />
+    <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModulePhysics2D.cs" />
+    <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleSprite.cs" />
+    <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUI.cs" />
+    <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
+    <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUtils.cs" />
+    <Compile Include="Assets\Scripts\BattleMap\Enums\BattleMapActionStatusType.cs" />
     <Compile Include="Assets\Scripts\BattleMap\Enums\BattleMapCommandType.cs" />
     <Compile Include="Assets\Scripts\BattleMap\Enums\BattleMapIconStatusType.cs" />
     <Compile Include="Assets\Scripts\BattleMap\Enums\BattleMapIconType.cs" />
     <Compile Include="Assets\Scripts\BattleMap\Enums\BattleMapMonsterType.cs" />
     <Compile Include="Assets\Scripts\BattleMap\Enums\BattleMapMoveStatusType.cs" />
+    <Compile Include="Assets\Scripts\BattleMap\Enums\BattleMapStatusPanelPositionType.cs" />
+    <Compile Include="Assets\Scripts\BattleMap\Enums\BattleMapStatusPanelType.cs" />
     <Compile Include="Assets\Scripts\BattleMap\Enums\BattleMapStatusType.cs" />
     <Compile Include="Assets\Scripts\BattleMap\Enums\BattleMapTeamColorType.cs" />
     <Compile Include="Assets\Scripts\BattleMap\Enums\MapObjectPatternType.cs" />
@@ -73,12 +83,18 @@
     <Compile Include="Assets\Scripts\BattleMap\Enums\MapTileJointPositionType.cs" />
     <Compile Include="Assets\Scripts\BattleMap\Enums\MapTileType.cs" />
     <Compile Include="Assets\Scripts\BattleMap\Enums\MapTileViewType.cs" />
+    <Compile Include="Assets\Scripts\BattleMap\GameObject\BattleMapActionController.cs" />
+    <Compile Include="Assets\Scripts\BattleMap\GameObject\BattleMapBattleController.cs" />
     <Compile Include="Assets\Scripts\BattleMap\GameObject\BattleMapCameraController.cs" />
     <Compile Include="Assets\Scripts\BattleMap\GameObject\BattleMapCommandController.cs" />
     <Compile Include="Assets\Scripts\BattleMap\GameObject\BattleMapCommandGenerator.cs" />
     <Compile Include="Assets\Scripts\BattleMap\GameObject\BattleMapCommandPrefabHolder.cs" />
+    <Compile Include="Assets\Scripts\BattleMap\GameObject\BattleMapDialogGenerator.cs" />
+    <Compile Include="Assets\Scripts\BattleMap\GameObject\BattleMapDialogPrefabHolder.cs" />
     <Compile Include="Assets\Scripts\BattleMap\GameObject\BattleMapMonsterGenerator.cs" />
     <Compile Include="Assets\Scripts\BattleMap\GameObject\BattleMapMoveController.cs" />
+    <Compile Include="Assets\Scripts\BattleMap\GameObject\BattleMapSkillSelectGenerator.cs" />
+    <Compile Include="Assets\Scripts\BattleMap\GameObject\BattleMapSkillSelectPrefabHolder.cs" />
     <Compile Include="Assets\Scripts\BattleMap\GameObject\BattleMapStatusGenerator.cs" />
     <Compile Include="Assets\Scripts\BattleMap\GameObject\BattleMapStatusPrefabHolder.cs" />
     <Compile Include="Assets\Scripts\BattleMap\GameObject\BattleMapTeamGenerator.cs" />
@@ -97,13 +113,17 @@
     <Compile Include="Assets\Scripts\BattleMap\GameObject\MapTilePrefabHolder.cs" />
     <Compile Include="Assets\Scripts\BattleMap\GameObject\MapTileRandomGenerator.cs" />
     <Compile Include="Assets\Scripts\BattleMap\GameObject\MonsterPrefabHolder.cs" />
+    <Compile Include="Assets\Scripts\BattleMap\GameObject\ParticleSystemPrefabHolder.cs" />
     <Compile Include="Assets\Scripts\BattleMap\GameObject\TestController.cs" />
+    <Compile Include="Assets\Scripts\BattleMap\Map\Battle\BattleProcessor.cs" />
+    <Compile Include="Assets\Scripts\BattleMap\Map\Battle\BattleResult.cs" />
+    <Compile Include="Assets\Scripts\BattleMap\Map\Battle\BattleResultOrderListCreator.cs" />
+    <Compile Include="Assets\Scripts\BattleMap\Map\Battle\BattleResultSet.cs" />
     <Compile Include="Assets\Scripts\BattleMap\Map\BattleMap.cs" />
     <Compile Include="Assets\Scripts\BattleMap\Map\BattleMapCreator.cs" />
     <Compile Include="Assets\Scripts\BattleMap\Map\BattleMapIcon.cs" />
     <Compile Include="Assets\Scripts\BattleMap\Map\BattleMapIcons.cs" />
     <Compile Include="Assets\Scripts\BattleMap\Map\BattleMapSetting.cs" />
-    <Compile Include="Assets\Scripts\BattleMap\Map\BattleMapStatus.cs" />
     <Compile Include="Assets\Scripts\BattleMap\Map\BattleMapTile.cs" />
     <Compile Include="Assets\Scripts\BattleMap\Map\BattleMapTileJointInfo.cs" />
     <Compile Include="Assets\Scripts\BattleMap\Map\BattleMapTileMask.cs" />
@@ -128,7 +148,14 @@
     <Compile Include="Assets\Scripts\BattleMap\Map\MapRandom\RandomMapCaExecutor.cs" />
     <Compile Include="Assets\Scripts\BattleMap\Map\MapRandom\RandomMapCellAutomatoner.cs" />
     <Compile Include="Assets\Scripts\BattleMap\Map\MapRandom\RandomMapCreator.cs" />
+    <Compile Include="Assets\Scripts\BattleMap\Map\MapState\BattleMapActionStatus.cs" />
     <Compile Include="Assets\Scripts\BattleMap\Map\MapState\BattleMapMoveStatus.cs" />
+    <Compile Include="Assets\Scripts\BattleMap\Map\MapState\BattleMapStatus.cs" />
+    <Compile Include="Assets\Scripts\BattleMap\Map\SequenceCreator\BattleSequenceCreator.cs" />
+    <Compile Include="Assets\Scripts\BattleMap\Map\SequenceCreator\BattleSequencePrepareCreator.cs" />
+    <Compile Include="Assets\Scripts\BattleMap\Map\SkillSelect\BattleMapSkillSelectObject.cs" />
+    <Compile Include="Assets\Scripts\BattleMap\Map\SkillSelect\BattleMapSkillSelectOperator.cs" />
+    <Compile Include="Assets\Scripts\BattleMap\Map\Status\BattleMapStatusPanelObject.cs" />
     <Compile Include="Assets\Scripts\BattleMap\Map\Status\BattleMapStatusPanelOperator.cs" />
     <Compile Include="Assets\Scripts\BattleMap\Map\Utility\MapUtils.cs" />
     <Compile Include="Assets\Scripts\BattleMap\Move\BattleMapMonsterMover.cs" />
@@ -142,9 +169,14 @@
     <Compile Include="Assets\Scripts\BattleMap\Party\BattleMapMonsterStatus.cs" />
     <Compile Include="Assets\Scripts\BattleMap\Party\BattleMapTeam.cs" />
     <Compile Include="Assets\Scripts\BattleMap\Party\BattleMapTeams.cs" />
+    <Compile Include="Assets\Scripts\Common\Enums\EffectType.cs" />
+    <Compile Include="Assets\Scripts\Common\Enums\MonsterSkillTargetType.cs" />
+    <Compile Include="Assets\Scripts\Common\Enums\MonsterSkillType.cs" />
+    <Compile Include="Assets\Scripts\Common\Party\MonsterSkill.cs" />
     <Compile Include="Assets\Scripts\Common\Utility\EnumUtils.cs" />
     <Compile Include="Assets\Scripts\Common\Utility\PrefabUtils.cs" />
     <Compile Include="Assets\Scripts\Common\Utility\RandomUtils.cs" />
+    <None Include="Assets\Demigiant\DOTween\readme.txt" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>E:/workspace/unity/MapGenerator/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
@@ -231,6 +263,9 @@
     </Reference>
     <Reference Include="UnityEngine.ParticleSystemModule">
       <HintPath>E:/programs/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.ParticleSystemModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ParticlesLegacyModule">
+      <HintPath>E:/programs/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.ParticlesLegacyModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.PerformanceReportingModule">
       <HintPath>E:/programs/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.PerformanceReportingModule.dll</HintPath>
@@ -351,6 +386,9 @@
     </Reference>
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>E:/programs/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween">
+      <HintPath>E:/workspace/unity/MapGenerator/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Analytics">
       <HintPath>C:/Users/toyama/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>

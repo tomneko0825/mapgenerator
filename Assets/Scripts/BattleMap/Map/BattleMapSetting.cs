@@ -9,6 +9,6 @@ public class BattleMapSetting {
     /// <summary>
     /// マップの傾き回数
     /// </summary>
-    public float TiltCount { get; set; }
+    public int TiltCount { get; set; }
 
 }

@@ -1,8 +1,144 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
+using UnityEngine;
 
 public class MapUtils
 {
+
+    /// <summary>
+    /// 範囲の描画
+    /// </summary>
+    /// <param name="tileSet"></param>
+    /// <param name="iconInstaller"></param>
+    public static void DrawRangeTile(HashSet<BattleMapTile> tileSet, Action<BattleMapTile, int> iconInstaller)
+    {
+        foreach (BattleMapTile bmt in tileSet)
+        {
+            // 範囲の描画
+            DrawRangeTile(bmt, tileSet, iconInstaller);
+        }
+    }
+
+    /// <summary>
+    /// 範囲の描画
+    /// </summary>
+    /// <param name="bmt"></param>
+    /// <param name="tileSet"></param>
+    private static void DrawRangeTile(BattleMapTile bmt, HashSet<BattleMapTile> tileSet, Action<BattleMapTile, int> iconInstaller)
+    {
+        BattleMapTileJointInfo jointInfo = bmt.JointInfo;
+
+        foreach (MapTileJointPositionType jointPositionType in Enum.GetValues(typeof(MapTileJointPositionType)))
+        {
+            BattleMapTile jointTile = jointInfo.GetJointTile(jointPositionType);
+
+            bool isDraw = false;
+
+            // はじっこは描写
+            if (jointTile == null)
+            {
+                isDraw = true;
+            }
+
+            else
+            {
+                // 移動可能タイルに存在しない場合は描写
+                if (tileSet.Contains(jointTile) == false)
+                {
+                    isDraw = true;
+                }
+
+            }
+
+            // 描写
+            if (isDraw == true)
+            {
+                iconInstaller(bmt, (int)jointPositionType * 60);
+            }
+
+        }
+
+    }
+
+    /// <summary>
+    /// タイル間の距離を取得
+    /// </summary>
+    /// <param name="from"></param>
+    /// <param name="to"></param>
+    /// <returns></returns>
+    public static int GetRange(BattleMapTile from, BattleMapTile to)
+    {
+
+        int max = 500;
+
+        // 距離内にあるかひたすら計算
+        for (int i = 1; i < max; i++)
+        {
+
+            List<BattleMapTile> list = GetRangeTileList(from, i);
+
+            if (list.Contains(to))
+            {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    /// <summary>
+    /// 指定された距離のタイル取得
+    /// </summary>
+    /// <param name="centerTile"></param>
+    /// <param name="range"></param>
+    /// <returns></returns>
+    public static List<BattleMapTile> GetRangeTileList(BattleMapTile centerTile, int range)
+    {
+        HashSet<BattleMapTile> tileSet = new HashSet<BattleMapTile>();
+
+        // このタイルを移動可能に追加
+        tileSet.Add(centerTile);
+
+        // タイルごとの処理
+        foreach (BattleMapTile jointTile in centerTile.JointInfo.GetJointTileList())
+        {
+            CheckRange(jointTile, range, tileSet);
+        }
+
+        return new List<BattleMapTile>(tileSet);
+    }
+
+
+    /// <summary>
+    /// 距離のチェック
+    /// </summary>
+    /// <param name="targetTile"></param>
+    /// <param name="range"></param>
+    /// <param name="tileSet"></param>
+    private static void CheckRange(
+        BattleMapTile targetTile, int range, HashSet<BattleMapTile> tileSet)
+    {
+
+        // このタイルを追加
+        tileSet.Add(targetTile);
+
+        // 距離を減少
+        int tmpRange = range - 1;
+
+        // 距離がなくなったら終了
+        if (tmpRange <= 0)
+        {
+            return;
+        }
+
+        // タイルごとの処理
+        foreach (BattleMapTile jointTile in targetTile.JointInfo.GetJointTileList())
+        {
+            CheckRange(jointTile, tmpRange, tileSet);
+        }
+    }
+
 
     /// <summary>
     /// 隣接しているタイルの地形タイプを取得

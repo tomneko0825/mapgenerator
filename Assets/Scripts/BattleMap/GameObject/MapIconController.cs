@@ -25,4 +25,26 @@ public class MapIconController : MonoBehaviour
         }
 
     }
+
+    /// <summary>
+    /// マーカーを強調表示
+    /// </summary>
+    /// <param name="monster"></param>
+    public void HighlightMarker(BattleMapMonster monster)
+    {
+        // マーカーを回転させる
+        BattleMapIcon icon = holder.BattleMapIcons.GetSingle(BattleMapIconType.MONSTER_MAKER, monster.X, monster.Y);
+        icon.BattleMapIconStatusType = BattleMapIconStatusType.HIGHLIGHT;
+    }
+
+    /// <summary>
+    /// マーカーの強調表示の終了
+    /// </summary>
+    /// <param name="monster"></param>
+    public void UnHighlightMarker(BattleMapMonster monster)
+    {
+        BattleMapIcon icon = holder.BattleMapIcons.GetSingle(BattleMapIconType.MONSTER_MAKER, monster.X, monster.Y);
+        icon.BattleMapIconStatusType = BattleMapIconStatusType.NORMAL;
+    }
+
 }

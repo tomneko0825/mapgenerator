@@ -7,6 +7,9 @@ public class BattleMapMonsterStatus
 {
     public BattleMapMonsterStatus()
     {
+        this.Level = 1;
+        this.Charge = 0;
+
         this.MaxHp = 40;
         this.Hp = 40;
         this.Atk = 30;
@@ -24,6 +27,11 @@ public class BattleMapMonsterStatus
     /// レベル
     /// </summary>
     public int Level { get; set; }
+
+    /// <summary>
+    /// チャージ
+    /// </summary>
+    public int Charge { get; set; }
 
     /// <summary>
     /// HP最大値

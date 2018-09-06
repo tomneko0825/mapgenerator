@@ -20,6 +20,8 @@ public class MapTileController : MonoBehaviour
 
     public BattleMapMoveController battleMapMoveController;
 
+    public BattleMapActionController battleMapActionController;
+
     public BattleMapStatusGenerator statusGenerator;
 
     public BattleMapCameraController cameraController;
@@ -65,6 +67,12 @@ public class MapTileController : MonoBehaviour
             return;
         }
 
+        // モーダルならパス
+        if (holder.BattleMapStatus.OnModal)
+        {
+            return;
+        }
+
         // 左クリック
         if (Input.GetMouseButtonDown(0))
         {
@@ -95,10 +103,14 @@ public class MapTileController : MonoBehaviour
                     statusGenerator.ShowStatus(bmt);
                 }
 
-                // TODO: いったんMOVEのみ
                 else if (holder.BattleMapStatus.BattleMapStatusType == BattleMapStatusType.MOVE)
                 {
                     battleMapMoveController.Move(bmt);
+                }
+
+                else if (holder.BattleMapStatus.BattleMapStatusType == BattleMapStatusType.ACTION)
+                {
+                    battleMapActionController.Action(bmt);
                 }
             }
 

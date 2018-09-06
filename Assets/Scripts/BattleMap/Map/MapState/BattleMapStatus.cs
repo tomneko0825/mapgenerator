@@ -5,6 +5,10 @@
 /// </summary>
 public class BattleMapStatus
 {
+    /// <summary>
+    /// モーダル中
+    /// </summary>
+    public bool OnModal { get; set; }
 
     /// <summary>
     /// 画面の入力状態
@@ -40,6 +44,11 @@ public class BattleMapStatus
     public BattleMapMoveStatus BattleMapMoveStatus { get; set; }
 
     /// <summary>
+    /// アクションの状態
+    /// </summary>
+    public BattleMapActionStatus BattleMapActionStatus { get; set; }
+
+    /// <summary>
     /// コマンド変更可能なステータスかどうか
     /// </summary>
     /// <returns></returns>
@@ -55,6 +64,17 @@ public class BattleMapStatus
             }
         }
 
+        if (BattleMapStatusType == BattleMapStatusType.ACTION)
+        {
+            // アクションの場合、ステータスが選択前以外は不可能
+            if (BattleMapActionStatus != null
+                && BattleMapActionStatus.BattleMapActionStatusType != BattleMapActionStatusType.BEFORE_TARGET_SELECT)
+            {
+                return false;
+            }
+        }
+
+
         return true;
 
     }
@@ -68,6 +88,12 @@ public class BattleMapStatus
             && BattleMapMoveStatus != null)
         {
             str += BattleMapMoveStatus.ToString();
+        }
+
+        else if (BattleMapStatusType == BattleMapStatusType.ACTION
+            && BattleMapActionStatus != null)
+        {
+            str += BattleMapActionStatus.ToString();
         }
 
         return str;

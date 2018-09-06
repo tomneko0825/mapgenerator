@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -50,5 +52,58 @@ public class BattleMapMonster {
     /// </summary>
     public BattleMapMonsterStatus BattleStatus { get; set; }
 
+    /// <summary>
+    /// スキル
+    /// </summary>
+    public List<MonsterSkill> SkillList { get; set; }
 
+    /// <summary>
+    /// カウンタースキル
+    /// </summary>
+    public List<MonsterSkill> CounterSkillList { get; set; }
+
+    /// <summary>
+    /// 利用可能なスキルのリスト
+    /// </summary>
+    public List<MonsterSkill> GetAvailableSkillList()
+    {
+        List<MonsterSkill> retList = new List<MonsterSkill>();
+
+        foreach (MonsterSkill skill in SkillList)
+        {
+            // アタックのみ
+            if (skill.MonsterSkillType == MonsterSkillType.ATTACK)
+            {
+                // チャージ完了
+                if (skill.Charge <= BattleStatus.Charge)
+                {
+                    retList.Add(skill);
+                }
+            }
+        }
+
+        return retList;
+    }
+
+    /// <summary>
+    /// カウンタースキルを取得
+    /// </summary>
+    /// <returns></returns>
+    public MonsterSkill GetCounterSkill(int range)
+    {
+        // チャージが大きい順にソートしてある想定
+        foreach (MonsterSkill skill in CounterSkillList)
+        {
+            // チャージ完了かつレンジが届く
+            if (skill.Charge <= BattleStatus.Charge
+                && range <= skill.Range)
+            {
+                // TODO: 威力が一番大きいもの？
+                return skill;
+
+            }
+        }
+
+        return null;
+    }
 }

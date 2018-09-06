@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using System.Linq;
 
 public class BattleMapMonsters　{
 
@@ -19,15 +21,18 @@ public class BattleMapMonsters　{
     /// <returns></returns>
     public BattleMapMonster GetMonster(int x, int y)
     {
-        foreach (BattleMapMonster monster in monsterList)
-        {
-            if (monster.X == x && monster.Y == y)
-            {
-                return monster;
-            }
-        }
+        //foreach (BattleMapMonster monster in monsterList)
+        //{
+        //    if (monster.X == x && monster.Y == y)
+        //    {
+        //        return monster;
+        //    }
+        //}
 
-        return null;
+        //return null;
+
+        return monsterList.FirstOrDefault<BattleMapMonster>(
+            monster => monster.X == x && monster.Y == y);
     }
 
     /// <summary>
@@ -40,5 +45,24 @@ public class BattleMapMonsters　{
         return GetMonster(bmt.X, bmt.Y);
     }
 
+    /// <summary>
+    /// idから取得
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public BattleMapMonster GetMonster(string id)
+    {
+        return monsterList.FirstOrDefault<BattleMapMonster>(
+            monster => monster.Id == id);
+    }
+
+    /// <summary>
+    /// 倒されたので削除
+    /// </summary>
+    /// <param name="monster"></param>
+    public void DownMonster(BattleMapMonster monster)
+    {
+        monsterList.Remove(monster);
+    }
 
 }

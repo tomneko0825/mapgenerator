@@ -13,6 +13,8 @@ public class BattleMapMoveController : MonoBehaviour
 
     public MapIconGenerator iconGenerator;
 
+    public MapIconController iconController;
+
     public MapObjectGenerator mapObjectGenerator;
 
     public BattleMapMonsterGenerator monsterGenerator;
@@ -36,7 +38,7 @@ public class BattleMapMoveController : MonoBehaviour
             return;
         }
 
-        BattleMapMoveProcessor moveProcessor = new BattleMapMoveProcessor(holder, iconGenerator);
+        BattleMapMoveProcessor moveProcessor = new BattleMapMoveProcessor(holder, iconGenerator, iconController);
 
         // モードごと
         BattleMapMoveStatus moveStatus = holder.BattleMapStatus.BattleMapMoveStatus;
@@ -52,7 +54,7 @@ public class BattleMapMoveController : MonoBehaviour
                 return;
             }
 
-            // 移動処理
+            // 移動可能範囲の表示
             moveProcessor.ShowMovable(target);
 
             // ステータスの表示

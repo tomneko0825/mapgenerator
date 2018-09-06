@@ -83,10 +83,39 @@ public class BattleMapCommandGenerator : MonoBehaviour
         commandController.DrawActionBoard();
     }
 
-
-    public void Test(BattleMapCommandType commandType)
+    /// <summary>
+    /// コマンドの追加
+    /// </summary>
+    public void AddCommand()
     {
-        Debug.Log("onclick[" + commandType + "]");
+        string text = dropdownAddCommand.captionText.text;
+
+        BattleMapCommandType commandType = BattleMapCommandType.MOVE;
+
+        if (text == "Move")
+        {
+            commandType = BattleMapCommandType.MOVE;
+        }
+
+        else if(text == "Action")
+        {
+            commandType = BattleMapCommandType.ACTION;
+        }
+
+        else if(text == "Summon")
+        {
+            commandType = BattleMapCommandType.SUMMON;
+        }
+
+        // ボード
+        BattleMapCommandBoard commandBoard = holder.GetCurrentTeam().CommandBoard;
+
+        // コマンドを作成
+        BattleMapCommand command = CreateBattleMapCommand(commandBoard.GameObject, commandType, UnityEngine.Random.Range(2, 5));
+        commandBoard.CommandList.Add(command);
+
+        // ボードの更新
+        commandController.DrawActionBoard();
     }
 
 }
